@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Record and Upload</title>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha256-KM512VNnjElC30ehFwehXjx1YCHPiQkOPmqnrWtpccM=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.4.1/jquery-migrate.min.js" integrity="sha256-SOuLUArmo4YXtXONKz+uxIGSKneCJG4x0nVcA0pFzV0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.4.0/bootbox.min.js" integrity="sha256-sfG8c9ILUB8EXQ5muswfjZsKICbRIJUG/kBogvvV5sY=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" src="css/styles.css" />
+    <link rel="stylesheet" src="css/MedEntry.css" />
+    <style>
+        #verbalAuthorization {
+            height: 450px;
+            width: 750px;
+            border: 1px solid rgba(20, 20, 20,.8);
+            position: absolute;
+            top: -100px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            display:;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            padding-left: 150px;
+            padding-right: 150px;
+            padding-bottom: 20px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 2px;
+            background-color: lightgray
+        }
+
+        #progress-bar {
+            width: 0;
+            height: 3px;
+            background-color: Highlight;
+            text-align: center;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.5);
+        }
+
+        .process-btn {
+            padding: 10px 20px;
+            background-color: #2b76aa;
+            border: 0;
+            border-radius: 35px;
+            font-size: 12px;
+            color: #ffffff;
+        }
+
+            .process-btn:hover {
+                background-color: var(--color-EPMediumBlueHover);
+            }
+
+        .process-btn-disabled {
+            padding: 10px 20px;
+            background-color: lightgray;
+            border: 0;
+            border-radius: 35px;
+            font-size: 12px;
+            color: #ffffff;
+        }
+
+        button.ClearBorderless {
+            border-style: none;
+            border-color: inherit;
+            border-width: medium;
+            background: no-repeat;
+            outline: none;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .ScreenTitle {
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--color-EPMediumGrey);
+        }
+
+            .ScreenTitle h3 {
+                margin-top: 10px;
+            }
+
+        .ButtonRight {
+            position: absolute;
+            right: 10px;
+            top: 13px;
+            color: var(--color-EPMediumBlue);
+        }
+    </style>
+</head>
+<body>
+    <div id="verbalAuthorization">
+        <div class="ScreenTitle CenterHorizonally">
+            <h4>Record Something</h4>
+            <button type="button" class="ClearBorderless ButtonRight" id="btnCancelVn">Cancel</button>
+        </div>
+        <div style="width: 100%; padding: 10px"></div>
+
+        <div id="divScript" style="width: 100%; padding-left: 10px; padding-right: 10px; padding-bottom: 30px">
+        </div>
+
+        <!-- PROGRESS BAR AND ELAPSED TIME DISPLAY -->
+        <div id="divTimeCount" style="text-align: right; color: #2B76AA; padding-left: 150px; padding-right: 150px; font-size: 10px">0.00</div>
+
+        <div id="pbContainer" class="progress-bar-container">
+            <div id="pbBg" class="progress-bar-bg">
+                <div id="progress-bar"></div>
+            </div>
+        </div>
+
+        <!-- AUDIO FILE HTML ELEMENT -->
+        <div style="text-align: center;" id="divInitAudio">
+            <button type="button" class="btn btn-default" style="display: none" id="btnVoiceNotes">Retry</button>
+        </div>
+
+        <div id='btns' style="margin-bottom: 30px;">
+            <img src="images/play.png" id='btnPlayback' style="display: none; padding-right: 20px" />
+            <img src="images/record.png" id='btnStart' />
+            <img src="images/stop-recording.png" id='btnStop' style="display: none" />
+            <img src="images/delete.png" id='btnDelete' style="display: none; padding-left: 20px" />
+        </div>
+
+        <div id="divUpload" style="text-align: center; margin-top: 10px;">
+            <ul class="list-unstyled" id='ul'></ul>
+        </div>
+
+        <button type="button" style="margin-top: 10px; margin-bottom: 10px;" class="process-btn-disabled" disabled id="btnSave">Save</button>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript" src="js/audiocapture.js" ></script>
+<script>
+    initAudio();
+</script>
